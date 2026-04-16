@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./backend
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./airdr.db:/app/airdr.db
+
+  dashboard:
+    build: ./dashboard
+    env_file: .env
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dashboard:/app
+    depends_on:
+      - backend
