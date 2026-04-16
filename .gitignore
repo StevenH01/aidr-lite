@@ -27,3 +27,6 @@ dist/
 *.sqlite
 logs/
 .DS_Store
+
+# Scripts
+*.sh
