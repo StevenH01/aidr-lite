@@ -2,8 +2,20 @@ from __future__ import annotations
 
 import logging
 import os
+from pathlib import Path
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
+
+# Load .env from the repo root (two levels up from src/aidr_backend/).
+# Variables already set in the environment take priority — this means Docker
+# and CI env vars always win over the file, which is the correct behaviour.
+# __file__ = backend/src/aidr_backend/main.py
+# .parent   = backend/src/aidr_backend/
+# .parent²  = backend/src/
+# .parent³  = backend/
+# .parent⁴  = repo root  ← .env lives here
+load_dotenv(Path(__file__).parents[3] / ".env")
 
 from .api.routes_alerts import router as alerts_router
 from .api.routes_events import router as events_router
